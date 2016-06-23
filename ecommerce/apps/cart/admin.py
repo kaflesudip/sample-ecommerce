@@ -24,6 +24,5 @@ class ChoicesFilter(admin.SimpleListFilter):
 
 class CartAdmin(admin.ModelAdmin):
     list_filter = (ChoicesFilter,)
-    search_fields = ("title", "description", )
 
 admin.site.register(Cart, CartAdmin)
