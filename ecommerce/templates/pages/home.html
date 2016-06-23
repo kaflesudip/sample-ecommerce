@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+  <div class="card-columns">
+
+  {%  for category in categories %}
+      <div class="card">
+        <a href="{% url 'catalogue:product_list_category' category.slug %}">
+          <div class="card-block">
+            <h4 class="card-title">{{category.title}}</h4>
+          </div>
+        </a>
+      </div>
+
+  {% endfor %}
+
+  </div>
+
+
+{% endblock content %}

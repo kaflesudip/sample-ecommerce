@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3> Your current Shopping Cart </h3>
+
+  {% for product in cart.products.all %}
+  <div>{{product.title}}</div>
+  {% endfor %}
+{% endblock content %}

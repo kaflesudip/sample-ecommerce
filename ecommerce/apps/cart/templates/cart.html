@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="text-sm-center">
+    <a href="{% url 'cart:checkout' object.id %}" class="btn btn-large btn-primary">Complete Checkout</a>
+  </div>
+  <h3> Your current Shopping Cart </h3>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th></th>
+      <th>Item</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>  {% for product in object.products.all %}
+
+    <tr>
+      <td scope="row">{{forloop.counter}}</td>
+      <td ><img style="max-height:100px" src="{{MEDIA_URL}}{{product.base_image}}"  alt=""></td>
+      <td>{{product.title}}</td>
+      <td>$ {{product.price}}</td>
+      <td><a href = "{% url 'cart:remove_from_cart' product.id %}" class="btn btn-danger">Remove</a></td>
+    </tr>
+  {% endfor %}
+  <tr >
+    <td colspan="3" class="text-sm-right">Total:</td> <td> ${{object.total_price}}</td>
+  </tr>
+  </tbody>
+  </table>
+
+  <div class="text-sm-center">
+    <a href="{% url 'cart:checkout' object.id %}" class="btn btn-large btn-primary">Complete Checkout</a>
+  </div>
+
+
+{% endblock content %}
