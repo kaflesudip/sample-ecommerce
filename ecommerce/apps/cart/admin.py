@@ -1,3 +1,26 @@
 from django.contrib import admin
+from .models import Cart
 
-# Register your models here.
+
+class ChoicesFilter(admin.SimpleListFilter):
+    title = 'Status'
+    parameter_name = 'status'
+
+    def lookups(self, request, model_admin):
+        return (
+            ("open", 'open'),
+            ("cancelled", 'cancelled'),
+            ("submitted", "submitted"),
+            ("processed", "processed"),
+            ("delivered", "delivered")
+        )
+
+    def queryset(self, request, queryset):
+        return queryset.filter(status=self.value())
+
+
+class CartAdmin(admin.ModelAdmin):
+    list_filter = (ChoicesFilter,)
+    search_fields = ("title", "description", )
+
+admin.site.register(Cart, CartAdmin)
