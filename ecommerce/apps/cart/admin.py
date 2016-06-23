@@ -16,7 +16,10 @@ class ChoicesFilter(admin.SimpleListFilter):
         )
 
     def queryset(self, request, queryset):
-        return queryset.filter(status=self.value())
+        if self.value():
+            return queryset.filter(status=self.value())
+        else:
+            return queryset
 
 
 class CartAdmin(admin.ModelAdmin):
